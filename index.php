@@ -3,20 +3,20 @@
     require('generateToken.php');
 
     $data = json_decode(file_get_contents("php://input"), true);
-    $login = $data['login'];
-    $mdp = $data['mdp'];
 
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
     try{  
         if (searchMedecin($login, $mdp)) {
+            $login = $data['login'];
+            $mdp = $data['mdp'];
             $headers = [ 'alg' => 'HS256', 'typ' => 'JWT', ];
             $payload = ['login' => $login,'mdp' => $mdp,'exp' => time() + 3600];
             $secret = 'secret';
             $token = generate_jwt($headers, $payload, $secret);
             setcookie("usertoken", $token);
-            echo "Authentification réussie";
+            deliver_response(200, "Authentification réussie", $token);
         } else {
-            echo "L'authentification a échoué.";
+            deliver_response(404, "Authentification échouée", null);
         }
     } catch (Exception $e) {    
         echo 'Erreur : ' . $e->getMessage();
@@ -29,12 +29,12 @@
                 $token = $_COOKIE['usertoken'];
                 $secret = 'secret';
                 if(is_jwt_valid($token, $secret)){
-                    echo "Authentification réussie";
+                    deliver_response(200, "Authentification réussie", $token);
                 } else {
-                    echo "Authentification échouée";
+                    deliver_response(404, "Authentification échouée", null);
                 }
             } else {
-                echo "Authentification échouée";
+                deliver_response(404, "Authentification échouée", null);
             }
         } catch (Exception $e) {    
             echo 'Erreur : ' . $e->getMessage();
