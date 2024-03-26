@@ -1,6 +1,6 @@
 <?php
-    require('./DbConfig.php');
-    require('./GenerateToken.php');
+    require_once('./DbConfig.php');
+    require_once('./GenerateToken.php');
 
     function searchMedecin($login, $mdp){
         $DbConfig = DbConfig::getDbConfig();

@@ -1,6 +1,6 @@
 <?php 
-    require('./FonctionsDB.php');
-    require('./GenerateToken.php');
+    require_once('./FonctionsDB.php');
+    require_once('./GenerateToken.php');
 
     $data = json_decode(file_get_contents("php://input"), true);
 
