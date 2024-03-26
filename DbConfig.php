@@ -7,7 +7,7 @@ class DbConfig
     {
         try {
             // gestionmedical_bd 351413_enzo
-           $this->linkpdo = new PDO('mysql:host=localhost;dbname=dbsecretaire', 'admin', 'admin', [
+           $this->linkpdo = new PDO('mysql:host=mysql-authapigestionmedical.alwaysdata.net;dbname=authapigestionmedical_auth', '353373', '$iutinfo', [
                 PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
             ]);
