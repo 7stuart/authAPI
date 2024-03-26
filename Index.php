@@ -6,9 +6,9 @@
 
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
     try{  
+        $login = $data['login'];
+        $mdp = $data['mdp'];
         if (searchMedecin($login, $mdp)) {
-            $login = $data['login'];
-            $mdp = $data['mdp'];
             $headers = [ 'alg' => 'HS256', 'typ' => 'JWT', ];
             $payload = ['login' => $login,'mdp' => $mdp,'exp' => time() + 3600];
             $secret = 'secret';
