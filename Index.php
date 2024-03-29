@@ -6,22 +6,27 @@
     $data = json_decode(file_get_contents("php://input"), true);
 
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
-    try{  
-        $login = $data['login'];
-        $mdp = $data['mdp'];
-        if (searchMedecin($login, $mdp)) {
-            $headers = [ 'alg' => 'HS256', 'typ' => 'JWT', ];
-            $payload = ['login' => $login,'mdp' => $mdp,'exp' => time() + 3600];
-            $secret = 'secret';
-            $token = generate_jwt($headers, $payload, $secret);
-            setcookie("usertoken", $token);
-            deliver_response(200, "Authentification réussie", $token);
-        } else {
-            deliver_response(404, "Authentification échouée", null);
+        try{  
+            $login = $data['login'];
+            $mdp = $data['mdp'];
+            if (searchMedecin($login, $mdp)) {
+                $headers = [ 'alg' => 'HS256', 'typ' => 'JWT', ];
+                $payload = ['login' => $login,'mdp' => $mdp,'exp' => time() + 3600];
+                $secret = 'secret';
+                $token = generate_jwt($headers, $payload, $secret);
+                setcookie("usertoken", $token, [
+                    'expires' => time() + 3600, // Durée de vie du cookie
+                    'path' => '/',               // Chemin d'accès du cookie
+                    'domain' => 'authapigestionmedical', // Domaine du cookie
+
+                ]);
+                deliver_response(200, "Authentification réussie", $token);
+            } else {
+                deliver_response(404, "Authentification échouée", null);
+            }
+        } catch (Exception $e) {    
+            echo 'Erreur : ' . $e->getMessage();
         }
-    } catch (Exception $e) {    
-        echo 'Erreur : ' . $e->getMessage();
-    }
     }
 
     if($_SERVER['REQUEST_METHOD'] === 'GET'){
