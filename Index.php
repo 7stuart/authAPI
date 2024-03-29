@@ -1,4 +1,5 @@
 <?php 
+    include_once './cors.php';
     require_once('./FonctionsDB.php');
     require_once('./GenerateToken.php');
 

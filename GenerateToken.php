@@ -1,5 +1,5 @@
 <?php 
-
+include_once './cors.php';
 function generate_jwt($headers, $payload, $secret) {
 	$headers_encoded = base64url_encode(json_encode($headers));
 
