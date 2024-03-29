@@ -16,9 +16,9 @@
                 $token = generate_jwt($headers, $payload, $secret);
                 // $_COOKIE["usertoken"] = $token;
                 setcookie("usertoken", $token, 
-                    time() + 3600, // Durée de vie du cookie
-                    '/',               // Chemin d'accès du cookie
-                    'authapigestionmedical' // Domaine du cookie
+                    'expires' => time() + 3600, // Durée de vie du cookie
+                    'path' => '/',               // Chemin d'accès du cookie
+                    'domain' => 'authapigestionmedical', // Domaine du cookie
 
                 );
                 deliver_response(200, "Authentification réussie", $token);
