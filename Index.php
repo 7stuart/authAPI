@@ -19,6 +19,7 @@
                     'expires' => time() + 3600, // Durée de vie du cookie
                     'path' => '/',               // Chemin d'accès du cookie
                     'domain' => 'authapigestionmedical', // Domaine du cookie
+                    'samesite' => 'Lax'
 
                 ]);
                 deliver_response(200, "Authentification réussie", $token);
