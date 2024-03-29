@@ -14,7 +14,7 @@
                 $payload = ['login' => $login,'mdp' => $mdp,'exp' => time() + 3600];
                 $secret = 'secret';
                 $token = generate_jwt($headers, $payload, $secret);
-                $_COOKIE["usertoken"] = $token
+                $_COOKIE["usertoken"] = $token;
                 // setcookie("usertoken", $token, [
                 //     'expires' => time() + 3600, // Durée de vie du cookie
                 //     'path' => '/',               // Chemin d'accès du cookie
