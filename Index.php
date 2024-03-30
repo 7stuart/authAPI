@@ -18,7 +18,7 @@
                 setcookie("usertoken", $token, [
                     'expires' => $expirationTime,
                     'path' => '/',
-                    'domain' => '.gestionmedicalfront.alwaysdata.net',
+                    'domain' => 'gestionmedicalfront.alwaysdata.net',
                     'secure' => true, // Assurez-vous d'être en HTTPS
                     'httponly' => true,
                     'samesite' => 'Lax' // ou 'None' si vous avez besoin de cross-site requests
