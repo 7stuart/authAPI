@@ -18,7 +18,7 @@
                 setcookie("usertoken", $token, [
                     'expires' => $expirationTime,
                     'path' => '/',
-                    'domain' => 'authapigestionmedical.alwaysdata.net',
+                    'domain' => '',
                     'secure' => true, // Assurez-vous d'être en HTTPS
                     'httponly' => true,
                     'samesite' => 'Lax' // ou 'None' si vous avez besoin de cross-site requests
