@@ -19,11 +19,12 @@
                 setcookie("usertoken", $token, [
                     'expires' => $expirationTime,
                     'path' => '/',
-                    // 'domain' => '.authapigestionmedical.alwaysdata.net',
+                    'domain' => '.gestionmedicalfront.alwaysdata.net', // Domaine ajusté pour correspondre à votre front-end
                     'secure' => true,
                     'httponly' => true,
-
+                    // 'samesite' => 'Lax' ou 'None' selon la nécessité de requêtes cross-domain
                 ]);
+                
                 deliver_response(200, "Authentification réussie", $token);
             } else {
                 deliver_response(404, "Authentification échouée", null);
