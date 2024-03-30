@@ -17,7 +17,7 @@
                 $token = generate_jwt($headers, $payload, $secret);
                 setcookie("usertoken", $token, [
                     'expires' => $expirationTime,
-                    'path' => '/',
+                    // 'path' => '/',
                     'domain' => '',
                     'secure' => true, // Assurez-vous d'être en HTTPS
                     'httponly' => true,
