@@ -18,10 +18,10 @@
                 setcookie("usertoken", $token, [
                     'expires' => time() + 3600,
                     'path' => '/',
-                    'domain' => '.gestionmedicalfront.alwaysdata.net',
+                    'domain' => '.authapigestionmedical.alwaysdata.net',
                     'secure' => true,
                     'httponly' => true,
-                    'samesite' => 'Lax'
+
                 ]);
                 deliver_response(200, "Authentification réussie", $token);
             } else {
