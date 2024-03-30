@@ -24,9 +24,9 @@
                     'samesite' => 'Lax' // ou 'None' si vous avez besoin de cross-site requests
                 ]);
                 
-                deliver_response(200, "Authentification réussie", $token);
+                deliver_response(200, "JWT délivré", $token);
             } else {
-                deliver_response(401, "Authentification échouée", null);
+                deliver_response(401, "JWT non délivré", null);
             }
             
         } catch (Exception $e) {    
