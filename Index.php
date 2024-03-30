@@ -15,14 +15,20 @@
                 $headers = ['alg' => 'HS256', 'typ' => 'JWT'];
                 $secret = 'secret';
                 $token = generate_jwt($headers, $payload, $secret);
-                setcookie("usertoken", $token, [
-                    'expires' => $expirationTime,
-                    'path' => '/',
-                    'domain' => 'gestionmedicalfront.alwaysdata.net',
-                    'secure' => true, // Assurez-vous d'être en HTTPS
-                    'httponly' => true,
-                    'samesite' => 'Lax' // ou 'None' si vous avez besoin de cross-site requests
-                ]);
+                // S'assurer que nous sommes sur HTTPS et sur le bon domaine
+                if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' && 
+                strpos($_SERVER['HTTP_HOST'], 'gestionmedicalfront.alwaysdata.net') !== false) {
+
+                    setcookie("usertoken", $token, [
+                        'expires' => $expirationTime,
+                        'path' => '/',
+                        'domain' => 'gestionmedicalfront.alwaysdata.net', // Ajustez si nécessaire
+                        'secure' => true, // Pour HTTPS seulement
+                        'httponly' => true, // Pour empêcher l'accès aux cookies via JavaScript
+                        'samesite' => 'Lax' // ou 'Strict', ou 'None' avec 'secure' pour les requêtes cross-site
+                    ]);
+                }
+
                 
                 deliver_response(200, "Authentification réussie", $token);
             } else {
