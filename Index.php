@@ -21,7 +21,6 @@
                     'domain' => '.authapigestionmedical.alwaysdata.net',
                     'secure' => true,
                     'httponly' => true,
-                    'samesite' => 'Lax'
 
                 ]);
                 deliver_response(200, "Authentification réussie", $token);
