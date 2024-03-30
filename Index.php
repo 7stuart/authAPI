@@ -20,8 +20,8 @@
                     'expires' => $expirationTime,
                     'path' => '/',
                     'domain' => '.gestionmedicalfront.alwaysdata.net', // Domaine ajusté pour correspondre à votre front-end
-                    'secure' => true,
-                    'httponly' => true,
+                    // 'secure' => true,
+                    // 'httponly' => true,
                     // 'samesite' => 'Lax' ou 'None' selon la nécessité de requêtes cross-domain
                 ]);
                 
