@@ -17,8 +17,8 @@
                 $token = generate_jwt($headers, $payload, $secret);
                 setcookie("usertoken", $token, [
                     'expires' => $expirationTime,
-                    // 'path' => '/',
-                    'domain' => '',
+                    'path' => '/GestionCabinetMedicalFront_end/',
+                    'domain' => '.alwaysdata.net',
                     'secure' => true, // Assurez-vous d'être en HTTPS
                     'httponly' => true,
                     'samesite' => 'Lax' // ou 'None' si vous avez besoin de cross-site requests
