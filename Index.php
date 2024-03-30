@@ -10,9 +10,9 @@
             $login = $data['login'];
             $mdp = $data['mdp'];
             if (searchMedecin($login, $mdp)) {
-                $expirationTime = time() + 3600;
-                $headers = [ 'alg' => 'HS256', 'typ' => 'JWT', ];
+                $expirationTime = time() + 36000;
                 $payload = ['login' => $login,'mdp' => $mdp,'exp' => $expirationTime];
+                $headers = [ 'alg' => 'HS256', 'typ' => 'JWT', ];
                 $secret = 'secret';
                 $token = generate_jwt($headers, $payload, $secret);
                 // $_COOKIE["usertoken"] = $token;
