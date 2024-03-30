@@ -10,13 +10,14 @@
             $login = $data['login'];
             $mdp = $data['mdp'];
             if (searchMedecin($login, $mdp)) {
+                $expirationTime = time() + 3600;
                 $headers = [ 'alg' => 'HS256', 'typ' => 'JWT', ];
-                $payload = ['login' => $login,'mdp' => $mdp,'exp' => time() + 3600];
+                $payload = ['login' => $login,'mdp' => $mdp,'exp' => $expirationTime];
                 $secret = 'secret';
                 $token = generate_jwt($headers, $payload, $secret);
                 // $_COOKIE["usertoken"] = $token;
                 setcookie("usertoken", $token, [
-                    'expires' => time() + 3600,
+                    'expires' => $expirationTime,
                     'path' => '/',
                     'domain' => '.authapigestionmedical.alwaysdata.net',
                     'secure' => true,
