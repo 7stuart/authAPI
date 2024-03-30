@@ -10,25 +10,25 @@
             $login = $data['login'];
             $mdp = $data['mdp'];
             if (searchMedecin($login, $mdp)) {
-                $expirationTime = time() + 36000;
-                $payload = ['login' => $login,'mdp' => $mdp,'exp' => $expirationTime];
-                $headers = [ 'alg' => 'HS256', 'typ' => 'JWT', ];
+                $expirationTime = time() + 36000; // 10 heures
+                $payload = ['login' => $login, 'exp' => $expirationTime]; // Retiré le mot de passe pour des raisons de sécurité
+                $headers = ['alg' => 'HS256', 'typ' => 'JWT'];
                 $secret = 'secret';
                 $token = generate_jwt($headers, $payload, $secret);
-                // $_COOKIE["usertoken"] = $token;
                 setcookie("usertoken", $token, [
                     'expires' => $expirationTime,
                     'path' => '/',
-                    'domain' => '.gestionmedicalfront.alwaysdata.net', // Domaine ajusté pour correspondre à votre front-end
-                    // 'secure' => true,
-                    // 'httponly' => true,
-                    // 'samesite' => 'Lax' ou 'None' selon la nécessité de requêtes cross-domain
+                    'domain' => '.gestionmedicalfront.alwaysdata.net',
+                    'secure' => true, // Assurez-vous d'être en HTTPS
+                    'httponly' => true,
+                    'samesite' => 'Lax' // ou 'None' si vous avez besoin de cross-site requests
                 ]);
                 
                 deliver_response(200, "Authentification réussie", $token);
             } else {
-                deliver_response(404, "Authentification échouée", null);
+                deliver_response(401, "Authentification échouée", null);
             }
+            
         } catch (Exception $e) {    
             echo 'Erreur : ' . $e->getMessage();
         }
