@@ -15,14 +15,6 @@
                 $headers = ['alg' => 'HS256', 'typ' => 'JWT'];
                 $secret = 'secret';
                 $token = generate_jwt($headers, $payload, $secret);
-                setcookie("usertoken", $token, [
-                    'expires' => $expirationTime,
-                    'path' => '/GestionCabinetMedicalFront_end/',
-                    'domain' => 'gestionmedicalfront',
-                    'secure' => true, // Assurez-vous d'être en HTTPS
-                    'httponly' => true,
-                    'samesite' => 'Lax' // ou 'None' si vous avez besoin de cross-site requests
-                ]);
                 
                 deliver_response(200, "JWT délivré", $token);
             } else {
